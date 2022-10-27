@@ -26,11 +26,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-//mongodb://localhost:27017/userDB
+
+//localDB -->> mongodb://localhost:27017/userDB
 mongoose.connect("mongodb+srv://Test123:Test-123@cluster0.rxnfe.mongodb.net/userDB", {useNewUrlParser: true});
 mongoose.set("useCreateIndex", true);
-
-//mongodb+srv://Yugg007:Yugg007@cluster0.rxnfe.mongodb.net/userDB?retryWrites=true&w=majority
 
 const userSchema = new mongoose.Schema ({
   email: String,
@@ -85,7 +84,6 @@ app.get("/auth/google",
 app.get("/auth/google/secrets",
   passport.authenticate('google', { failureRedirect: "/login" }),
   function(req, res) {
-    // Successful authentication, redirect to secrets.
     res.redirect("/secrets");
   });
 
